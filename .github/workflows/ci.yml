@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+
+defaults:
+  run:
+    shell: bash
+jobs:
+  test-arm:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update packages
+        run: |
+          sudo apt-get update
+      - name: Setup packages
+        run: |
+          sudo apt-get install -y gcc-14 g++-14 cmake meson libbrotli-dev libxml2-dev
+      - name: show path of installed packages
+        run: |
+          which gcc-14
+          which g++-14
+          which cmake
+          which meson
+      - name: show library
+        run: |
+          ls -al /usr/lib/*
